@@ -1,0 +1,92 @@
+$bgfile         Image3.png
+$bgsides        4
+$bgbottom       0
+$bgtop          1
+
+$texturefile    textures.png
+$texturesize    64
+
+$wallcolor      0 0 255
+$floorcolor     4 16 8
+$ceilingcolor   0 0 16
+
+$walltex        1
+$floortex       1
+$ceilingtex     0
+
+$wallfog        1
+$floorfog       1
+$ceilingfog     0
+
+$backclipplane  0
+$drawdistance   200
+$fogdistance    200
+$fogcolor       0 0 0
+
+$lightenable    1
+$minlight       50
+$maxlight       255
+
+$tiletypes
+. 13 -
+: 18 -
+# 27 wo
+F 9  wo
+B 34 wo
+~ 4  l
+S 23 o
+1 24 wo
+2 25 wo
+b 20 wo
+L 21 wo
+W 22 wo
+3 27 wo
+4 28 wo
+5 29 wo
+6 30 wo
+7 33 wo
+X 67 wo
+
+$mapsize        32  32
+$tilesize       16
+
+$tilemap
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+FBB.1112111.B.WWWWWWWWWWWWWWWWF#
+FBB....~...BB.W:::L...L:L...LWF#
+FBBB...~~.....W:::LbbbL:LbbbLWF#
+FBB.....~.....W:::L:::L:L:::LWF#
+X..~~~~.~.....W::::::::::::::WF#
+X~~~..~~~~....::::::::::::::WWF#
+1.BBB....~~...W::::::::::::::WF#
+FBBB......~...W:::L:::L:L:::LWF#
+F.BBB.....~...W:::LbbbL:LbbbLWF#
+F...B.....~...W:::L...L:L...LWF#
+FB........~...WWWWWWWWWWWWWWWWF#
+FBBB....~~~...................F#
+F.BB...~~.......F....33433...BF#
+F..B...~........FF...3...3..BBF#
+F......~........FF...5...3...BF#
+FB....~~..B....FFF...3...3..BBF#
+F....~~.BBB.....F....33433...BF#
+FBB..~.BB......FFFFF..........F#
+FBBB.~B....BB...FFF.B..33433.BF#
+FBBBB~B...BBBB...FF.BB.3...3BBF#
+FFFFB.B...BBBBB...FF...6...3BBF#
+FFFFB.BB...BBBBB..FFF..3...3BBF#
+FFFFFFFFBSB........FF..33433B.F#
+F...~BB...FFFFFFFF..F...FFFFFFF#
+F..~~.......BB...FFFFFFFF.....F#
+F..~.77777...B............BBB.F#
+F.~~.......77777.........BBBBBF#
+F~~F.............77777....BBB.F#
+F~F....77777..BB......FFFFF...F#
+F~F...........FFFFFFFFFFFFFF..F#
+#FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+
+$objects
+.player     5   2   315
+.light      7   2   200   6
+.light      20  6   200   6
+.light      26  6   200   6
+.light      2   6   200   6

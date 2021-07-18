@@ -6,6 +6,7 @@
 struct Config
 {
     char* title;
+    char* font;
     int windowWidth, windowHeight;
     int screenWidth, screenHeight;
     uint32_t windowFlags;

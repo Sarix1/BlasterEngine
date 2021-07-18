@@ -42,8 +42,10 @@ struct StateManager
     struct State* CurrentState;
 };
 
-int pushState  (struct State* state, struct StateList* stateList);
+int pushState       (struct State* state, struct StateList* stateList);
+int popState        (struct State* state, struct StateList* stateList);
 int initStateManager(struct StateManager* stateMgr);
 int updateAllStates (struct StateManager* stateMgr, double dt);
+int switchState     (struct StateManager* stateMgr, struct State* state);
 
 #endif

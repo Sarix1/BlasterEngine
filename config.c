@@ -1,5 +1,6 @@
 #include "config.h"
 #include <SDL2/SDL_video.h>
+#include <stdio.h>
 
 int loadConfig(struct Config* config, char* filename)
 {
@@ -7,6 +8,7 @@ int loadConfig(struct Config* config, char* filename)
     // Try to load configuration from file here; success returns; failure sets default values below
 
     config->title        = "Blasterline";
+    config->font         = "font.bmp";
     config->windowWidth  = 320;
     config->windowHeight = 240;
     config->screenWidth  = 256;

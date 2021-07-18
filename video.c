@@ -60,7 +60,7 @@ int initVideo(struct Video* video, struct Config* config) // could be split into
     }
 
     // Graphics
-    if (initFont(&video->Graphics.BasicFont, "font.bmp", 8, 8, video->Renderer) == 1)
+    if (initFont(&video->Graphics.BasicFont, config->font, 8, 8, video->Renderer) == 1)
     {
         printf("Error - initFont() failed\n");
 
@@ -96,7 +96,7 @@ int execGraphics(struct Video* video, struct MessageBus* MessageBus)
 
     // temporary test functions
     const char* text = "VIDEO TEST";
-    drawTextCentered(text, &video->Graphics.BasicFont, 0xFFFFFFFF, video);
+    drawTextCentered(text, &video->Graphics.BasicFont, 0xFFFFFF00, video);
 
     return 0;
 }
@@ -105,19 +105,23 @@ int initFont(struct Font* font, const char* filename, int w, int h, SDL_Renderer
 {
     printf("initFont()\n");
 
-    font->Surface   = SDL_LoadBMP(filename);
-    SDL_SetColorKey(font->Surface, SDL_TRUE, 0x00000000);
-    font->width     = w;
-    font->height    = h;
+    font->width  = w;
+    font->height = h;
 
-    if (font->Surface == NULL)
+    SDL_Surface* Surface = SDL_LoadBMP(filename);
+    SDL_SetColorKey(Surface, SDL_TRUE, 0x00000000);
+
+    if (Surface == NULL)
     {
         printf("Error - SDL_LoadBMP() returned NULL\n");
 
         return 1;
     }
 
-    if ((font->Texture = SDL_CreateTextureFromSurface(renderer, font->Surface)) == NULL)
+    font->Texture = SDL_CreateTextureFromSurface(renderer, Surface);
+    SDL_FreeSurface(Surface);
+
+    if ((font->Texture) == NULL)
     {
         printf("Error - SDL_CreateTextureFromSurface() failed\n");
 
@@ -129,19 +133,12 @@ int initFont(struct Font* font, const char* filename, int w, int h, SDL_Renderer
 
 int drawText(const char* text, struct Font* font, int x, int y, int max_columns, int max_rows, uint32_t color, struct Video* video)
 {
-    char* c;
     int row;
     int column;
+    char* c = text;
     SDL_Rect source = {0, 0, font->width, font->height};
     SDL_Rect destination;
-
-    // Do this with texture color modulation instead, get rid of SDL_Surface in struct Font
-    static uint32_t last_color = 0x00000000;
-    if (color != last_color)
-    {
-        font->Surface->format->palette->colors[1] = uintToColor(color);
-        font->Texture = SDL_CreateTextureFromSurface(video->Renderer, font->Surface);
-    }
+    SDL_SetTextureColorMod(font->Texture, uintToRGB(color));
 
     if (x >= 0)             x           *= font->width;
     if (y >= 0)             y           *= font->height;
@@ -153,7 +150,7 @@ int drawText(const char* text, struct Font* font, int x, int y, int max_columns,
     destination.w = font->width;
     destination.h = font->height;
 
-    for (row = 0, c = text; row < max_rows; row++)
+    for (row = 0; row < max_rows; row++)
     {
         destination.x = x;
 

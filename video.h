@@ -6,10 +6,11 @@
 #include "config.h"
 #include "message.h"
 
+#define uintToRGB(color) ((color >> 16) & 0xFF), ((color >> 8) & 0xFF), (color & 0xFF)
+
 struct Font
 {
     SDL_Texture* Texture;
-    SDL_Surface* Surface;
     int width;
     int height;
 };
